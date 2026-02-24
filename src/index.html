@@ -43,6 +43,8 @@
       display: flex;
       gap: 8px;
       margin-bottom: 16px;
+      flex-wrap: wrap;
+      align-items: center;
     }
     select, input, button {
       padding: 10px 12px;
@@ -56,42 +58,14 @@
       outline: none;
       border-color: #e94560;
     }
-    #knownPlayers {
-      width: 140px;
+    #playerSelect {
+      min-width: 160px;
     }
-    #playerId {
-      flex: 1;
+    #playerIdInput {
+      width: 120px;
     }
-    .hero-search {
-      flex: 1;
-      position: relative;
-    }
-    #heroSearch {
-      width: 100%;
-    }
-    .hero-dropdown {
-      position: absolute;
-      top: 100%;
-      left: 0;
-      right: 0;
-      max-height: 200px;
-      overflow-y: auto;
-      background: #16213e;
-      border: 1px solid #333;
-      border-top: none;
-      border-radius: 0 0 4px 4px;
-      display: none;
-      z-index: 10;
-    }
-    .hero-dropdown.visible {
-      display: block;
-    }
-    .hero-option {
-      padding: 8px 12px;
-      cursor: pointer;
-    }
-    .hero-option:hover, .hero-option.highlighted {
-      background: #e94560;
+    #addPlayerBtn {
+      min-width: 60px;
     }
     button {
       background: #e94560;
@@ -107,40 +81,103 @@
       background: #555;
       cursor: not-allowed;
     }
-    .results {
-      margin-top: 24px;
-      padding: 20px;
+    .btn-secondary {
+      background: #0f3460;
+    }
+    .btn-secondary:hover:not(:disabled) {
+      background: #1a4a7a;
+    }
+    .selected-players {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+    .player-tag {
+      background: #0f3460;
+      padding: 6px 10px;
+      border-radius: 4px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 14px;
+    }
+    .player-tag .remove {
+      cursor: pointer;
+      opacity: 0.7;
+      font-size: 16px;
+    }
+    .player-tag .remove:hover {
+      opacity: 1;
+      color: #f87171;
+    }
+    /* Guild search */
+    .guild-search {
+      margin-bottom: 20px;
+      padding: 16px;
       background: #16213e;
       border-radius: 8px;
-      display: none;
     }
-    .results.visible {
-      display: block;
+    .guild-search h3 {
+      margin: 0 0 12px 0;
+      color: #e94560;
+      font-size: 14px;
+      text-transform: uppercase;
     }
-    .stat-grid {
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 16px;
-    }
-    .stat {
-      text-align: center;
-      padding: 16px;
-      background: #1a1a2e;
+    .guild-result {
+      margin-top: 12px;
+      padding: 12px;
+      background: #0f3460;
       border-radius: 4px;
     }
-    .stat-value {
-      font-size: 32px;
-      font-weight: bold;
-      color: #e94560;
+    .guild-result.hidden {
+      display: none;
     }
-    .stat-label {
+    .guild-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 12px;
+    }
+    .guild-name {
+      font-weight: bold;
+      font-size: 16px;
+    }
+    .guild-tag {
+      color: #888;
+      font-size: 14px;
+    }
+    .guild-meta {
       font-size: 12px;
       color: #888;
-      text-transform: uppercase;
-      margin-top: 4px;
+      margin-bottom: 12px;
     }
-    .win .stat-value { color: #4ade80; }
-    .loss .stat-value { color: #f87171; }
+    .guild-members {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      max-height: 150px;
+      overflow-y: auto;
+    }
+    .guild-member {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      padding: 4px 8px;
+      background: #1a1a2e;
+      border-radius: 4px;
+      font-size: 12px;
+    }
+    .guild-member button {
+      padding: 2px 6px;
+      min-width: auto;
+      font-size: 10px;
+    }
+    .guild-member.added {
+      opacity: 0.5;
+    }
+    .guild-member.added button {
+      display: none;
+    }
     .error {
       color: #f87171;
       margin-top: 16px;
@@ -152,6 +189,56 @@
     }
     .heroes-table-container.visible {
       display: block;
+    }
+    .filters {
+      margin-bottom: 16px;
+      padding: 16px;
+      background: #16213e;
+      border-radius: 8px;
+    }
+    .filters input {
+      border-color: #fff;
+    }
+    input[type="date"]::-webkit-calendar-picker-indicator {
+      filter: invert(1);
+    }
+    .filter-row {
+      display: flex;
+      gap: 16px;
+      align-items: center;
+      flex-wrap: wrap;
+      margin-bottom: 12px;
+    }
+    .filter-row:last-child {
+      margin-bottom: 0;
+    }
+    .filter-group {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .filter-group label {
+      color: #888;
+      font-size: 12px;
+      white-space: nowrap;
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      cursor: pointer;
+    }
+    .filter-group input {
+      width: 100px;
+    }
+    .filter-group span {
+      color: #888;
+    }
+    #filterName {
+      flex: 1;
+      min-width: 150px;
+    }
+    #clearFiltersBtn {
+      padding: 8px 12px;
+      min-width: auto;
     }
     .heroes-table-wrapper {
       max-height: 400px;
@@ -192,66 +279,17 @@
     .heroes-table tr:hover {
       background: #1a3a5e;
     }
-    .heroes-table tr.selected {
-      background: #e94560;
-    }
-    .heroes-table tr.selected:hover {
-      background: #ff6b6b;
-    }
     .heroes-table td.win {
       color: #4ade80;
     }
     .heroes-table td.loss {
       color: #f87171;
     }
-    .btn-secondary {
-      background: #0f3460;
+    .heroes-table .winrate.better {
+      color: #4ade80;
     }
-    .btn-secondary:hover:not(:disabled) {
-      background: #1a4a7a;
-    }
-    .filters {
-      margin-bottom: 16px;
-      padding: 16px;
-      background: #16213e;
-      border-radius: 8px;
-    }
-    .filters input {
-      border-color: #fff;
-    }
-    .filter-row {
-      display: flex;
-      gap: 16px;
-      align-items: center;
-      flex-wrap: wrap;
-      margin-bottom: 12px;
-    }
-    .filter-row:last-child {
-      margin-bottom: 0;
-    }
-    .filter-group {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-    }
-    .filter-group label {
-      color: #888;
-      font-size: 12px;
-      white-space: nowrap;
-    }
-    .filter-group input {
-      width: 80px;
-    }
-    .filter-group span {
-      color: #888;
-    }
-    #filterName {
-      flex: 1;
-      min-width: 150px;
-    }
-    #clearFiltersBtn {
-      padding: 8px 12px;
-      min-width: auto;
+    .heroes-table .winrate.worse {
+      color: #f87171;
     }
     .table-summary {
       margin-top: 24px;
@@ -263,150 +301,121 @@
       margin: 0 0 16px 0;
       color: #e94560;
     }
-    .compare-results {
-      margin-top: 24px;
-      display: none;
-      overflow-x: auto;
-    }
-    .compare-results.visible {
-      display: block;
-    }
-    .compare-table-wrapper {
-      max-height: 400px;
-      overflow-y: auto;
-      border-radius: 8px;
-    }
-    .compare-table {
-      width: 100%;
-      border-collapse: collapse;
-      background: #16213e;
-    }
-    .compare-table thead {
-      position: sticky;
-      top: 0;
-      background: #0f3460;
-      z-index: 1;
-    }
-    .compare-table th, .compare-table td {
-      padding: 12px;
-      text-align: left;
-      border-bottom: 1px solid #333;
-    }
-    .compare-table th {
-      background: #0f3460;
-      white-space: nowrap;
-    }
-    .compare-table .winrate.better {
-      color: #4ade80;
-    }
-    .compare-table .winrate.worse {
-      color: #f87171;
-    }
-    .compare-table tr:hover {
-      background: #1a3a5e;
-    }
-    .compare-cell {
-      font-size: 12px;
-    }
-    .compare-cell .games {
-      color: #888;
-    }
-    .compare-cell .winrate {
-      font-weight: bold;
-    }
-    .compare-cell .winrate.better {
-      color: #4ade80;
-    }
-    .compare-cell .winrate.worse {
-      color: #f87171;
-    }
-    .compare-cell .no-data {
-      color: #555;
-    }
-    .compare-summaries {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-      gap: 16px;
-      margin-top: 24px;
-    }
-    .compare-summary {
-      padding: 20px;
-      background: #1a1a2e;
-      border-radius: 8px;
-    }
-    .compare-summary h3 {
-      margin: 0 0 16px 0;
-      color: #e94560;
-      font-size: 14px;
-    }
-    .compare-summary .stat-grid {
-      grid-template-columns: repeat(2, 1fr);
-    }
-    .compare-summary .stat {
-      padding: 12px;
-    }
-    .compare-summary .stat-value {
-      font-size: 24px;
-    }
-    .section-toggle {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      user-select: none;
-    }
-    .section-toggle:hover {
-      opacity: 0.8;
-    }
-    .toggle-icon {
-      font-size: 12px;
-      transition: transform 0.2s;
-    }
-    .section-toggle.open .toggle-icon {
-      transform: rotate(90deg);
-    }
-    .collapsible {
-      overflow: hidden;
-      transition: max-height 0.3s ease;
-    }
-    .collapsible.hidden {
-      display: none;
-    }
-    .compare-players {
+    .summary-filters {
       display: flex;
       flex-wrap: wrap;
-      gap: 8px;
+      gap: 12px;
+      margin-bottom: 16px;
+      padding-bottom: 12px;
+      border-bottom: 1px solid #333;
     }
-    .player-select-row {
+    .summary-filters label {
       display: flex;
       align-items: center;
       gap: 4px;
-    }
-    .player-select-row select {
-      min-width: 120px;
-    }
-    .remove-player-btn {
-      background: #f87171;
-      border: none;
-      color: white;
-      width: 24px;
-      height: 24px;
-      border-radius: 4px;
+      font-size: 12px;
+      color: #888;
       cursor: pointer;
-      font-size: 14px;
-      padding: 0;
-      min-width: auto;
     }
-    .remove-player-btn:hover {
-      background: #ef4444;
+    .summary-filters label:hover {
+      color: #eee;
+    }
+    .stat-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 16px;
+    }
+    .stat {
+      text-align: center;
+      padding: 16px;
+      background: #1a1a2e;
+      border-radius: 4px;
+    }
+    .stat-value {
+      font-size: 32px;
+      font-weight: bold;
+      color: #e94560;
+    }
+    .stat-label {
+      font-size: 12px;
+      color: #888;
+      text-transform: uppercase;
+      margin-top: 4px;
+    }
+    .stat-pct {
+      font-size: 14px;
+      opacity: 0.7;
+    }
+    .win .stat-value { color: #4ade80; }
+    .loss .stat-value { color: #f87171; }
+    /* Multi-player summary rows */
+    .multi-player-summaries {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+    .player-summary-row {
+      display: grid;
+      grid-template-columns: 100px repeat(auto-fit, minmax(80px, 1fr));
+      gap: 8px;
+      align-items: center;
+      padding: 12px;
+      background: #16213e;
+      border-radius: 4px;
+    }
+    .player-summary-row .player-name {
+      font-weight: bold;
+      color: #e94560;
+      font-size: 14px;
+    }
+    .player-summary-row .stat-item {
+      text-align: center;
+    }
+    .player-summary-row .stat-item .value {
+      font-size: 18px;
+      font-weight: bold;
+      color: #eee;
+    }
+    .player-summary-row .stat-item .label {
+      font-size: 10px;
+      color: #888;
+      text-transform: uppercase;
+    }
+    .player-summary-row .stat-item.win .value { color: #4ade80; }
+    .player-summary-row .stat-item.loss .value { color: #f87171; }
+    @media (max-width: 768px) {
+      .player-summary-row {
+        grid-template-columns: 1fr 1fr;
+      }
+      .player-summary-row .player-name {
+        grid-column: span 2;
+        margin-bottom: 8px;
+      }
     }
   </style>
 </head>
 <body>
   <h1><img src="favicon.png" alt="Logo" class="logo">Fata plays Stats</h1>
 
+  <div class="guild-search">
+    <h3>Search Guild</h3>
+    <div class="form-row">
+      <input type="text" id="guildSearchInput" placeholder="Guild tag or ID...">
+      <button id="guildSearchBtn">Search</button>
+    </div>
+    <div id="guildResult" class="guild-result hidden">
+      <div class="guild-header">
+        <span><span class="guild-name" id="guildName"></span> <span class="guild-tag" id="guildTag"></span></span>
+        <button id="addAllGuildBtn" class="btn-secondary">Add All</button>
+      </div>
+      <div class="guild-meta" id="guildMeta"></div>
+      <div class="guild-members" id="guildMembers"></div>
+    </div>
+  </div>
+
   <div class="form-row">
-    <select id="knownPlayers">
-      <option value="">Known Players</option>
+    <select id="playerSelect">
+      <option value="">Known Players...</option>
       <option value="22707648">Cai</option>
       <option value="86928092">Rich</option>
       <option value="99364420">Gui</option>
@@ -419,75 +428,80 @@
       <option value="52530952">Avx</option>
       <option value="1479057070">Blues</option>
     </select>
-    <input type="text" id="playerId" placeholder="Player ID">
+    <input type="text" id="playerIdInput" placeholder="Player ID...">
+    <button id="addPlayerBtn">Add</button>
+    <div id="selectedPlayers" class="selected-players"></div>
   </div>
 
-  <div class="form-row">
-    <div class="hero-search">
-      <input type="text" id="heroSearch" placeholder="Search hero..." autocomplete="off">
-      <div id="heroDropdown" class="hero-dropdown"></div>
-      <input type="hidden" id="heroId">
-    </div>
-    <button id="searchBtn">Search</button>
-    <button id="allHeroesBtn" class="btn-secondary">All Heroes</button>
-  </div>
-
-  <div id="results" class="results">
-    <h3 id="selectedHeroName" style="margin: 0 0 16px 0; color: #e94560;"></h3>
-    <div class="stat-grid">
-      <div class="stat">
-        <div class="stat-value" id="totalMatches">-</div>
-        <div class="stat-label">Total Matches</div>
-      </div>
-      <div class="stat">
-        <div class="stat-value" id="winRate">-</div>
-        <div class="stat-label">Win Rate</div>
-      </div>
-      <div class="stat win">
-        <div class="stat-value" id="wins">-</div>
-        <div class="stat-label">Wins</div>
-      </div>
-      <div class="stat loss">
-        <div class="stat-value" id="losses">-</div>
-        <div class="stat-label">Losses</div>
-      </div>
-    </div>
-  </div>
+  <div id="error" class="error"></div>
 
   <div id="heroesTableContainer" class="heroes-table-container">
     <div class="filters">
       <div class="filter-row">
         <input type="text" id="filterName" placeholder="Filter by name...">
         <div class="filter-group">
+          <label>Mode:</label>
+          <select id="filterGameMode">
+            <option value="all">All</option>
+            <option value="ranked">Ranked</option>
+            <option value="normal">Normal</option>
+            <option value="turbo">Turbo</option>
+          </select>
+        </div>
+        <div class="filter-group">
+          <label>Date:</label>
+          <input type="date" id="filterDateFrom">
+          <span>-</span>
+          <input type="date" id="filterDateTo">
+        </div>
+      </div>
+      <div class="filter-row">
+        <div class="filter-group">
           <label>Games:</label>
           <input type="number" id="filterGamesMin" placeholder="Min" min="0">
           <span>-</span>
           <input type="number" id="filterGamesMax" placeholder="Max" min="0">
         </div>
-      </div>
-      <div class="filter-row">
         <div class="filter-group">
           <label>Win Rate:</label>
           <input type="number" id="filterWinRateMin" placeholder="Min %" min="0" max="100">
           <span>-</span>
           <input type="number" id="filterWinRateMax" placeholder="Max %" min="0" max="100">
         </div>
+      </div>
+      <div class="filter-row">
         <div class="filter-group">
           <label>Top:</label>
           <input type="number" id="filterTopX" placeholder="All" min="1">
+        </div>
+        <div class="filter-group">
+          <label>
+            <input type="checkbox" id="filterUnplayed"> Unplayed only
+          </label>
+        </div>
+        <div class="filter-group">
+          <label>Sort:</label>
+          <select id="sortBy">
+            <option value="games-desc">Games (High)</option>
+            <option value="games-asc">Games (Low)</option>
+            <option value="winRate-desc">Win Rate (High)</option>
+            <option value="winRate-asc">Win Rate (Low)</option>
+            <option value="name-asc">Name (A-Z)</option>
+            <option value="name-desc">Name (Z-A)</option>
+          </select>
         </div>
         <button id="clearFiltersBtn" class="btn-secondary">Clear</button>
       </div>
     </div>
     <div class="heroes-table-wrapper">
       <table class="heroes-table">
-        <thead>
+        <thead id="tableHead">
           <tr>
-            <th data-sort="name">Hero</th>
-            <th data-sort="games">Matches</th>
-            <th data-sort="win">Wins</th>
-            <th data-sort="loss">Losses</th>
-            <th data-sort="winRate">Win Rate</th>
+            <th>Hero</th>
+            <th>Matches</th>
+            <th>Wins</th>
+            <th>Losses</th>
+            <th>Win Rate</th>
           </tr>
         </thead>
         <tbody id="heroesTableBody"></tbody>
@@ -495,141 +509,244 @@
     </div>
     <div class="table-summary">
       <h3 id="summaryTitle">Summary</h3>
-      <div class="stat-grid">
-        <div class="stat">
+      <div class="summary-filters">
+        <label><input type="checkbox" id="showMatches" checked> Matches</label>
+        <label><input type="checkbox" id="showWinRate" checked> Win Rate</label>
+        <label><input type="checkbox" id="showWins" checked> Wins</label>
+        <label><input type="checkbox" id="showLosses" checked> Losses</label>
+        <label><input type="checkbox" id="showPlayTime" checked> Play Time</label>
+        <label><input type="checkbox" id="showAbandons" checked> Abandons</label>
+      </div>
+      <!-- Single player summary -->
+      <div class="stat-grid" id="singlePlayerSummary">
+        <div class="stat" data-stat="matches">
           <div class="stat-value" id="summaryMatches">-</div>
           <div class="stat-label">Total Matches</div>
         </div>
-        <div class="stat">
+        <div class="stat" data-stat="winRate">
           <div class="stat-value" id="summaryWinRate">-</div>
           <div class="stat-label">Win Rate</div>
         </div>
-        <div class="stat win">
+        <div class="stat win" data-stat="wins">
           <div class="stat-value" id="summaryWins">-</div>
           <div class="stat-label">Wins</div>
         </div>
-        <div class="stat loss">
+        <div class="stat loss" data-stat="losses">
           <div class="stat-value" id="summaryLosses">-</div>
           <div class="stat-label">Losses</div>
         </div>
-      </div>
-    </div>
-  </div>
-
-  <div id="error" class="error"></div>
-
-  <hr style="border-color: #333; margin: 40px 0;">
-
-  <h2 class="section-toggle" id="compareToggle" style="color: #e94560; margin-bottom: 20px; cursor: pointer;">
-    <span class="toggle-icon">▶</span> Compare Players
-  </h2>
-
-  <div id="compareSection" class="collapsible hidden">
-  <div id="comparePlayers" class="compare-players">
-    <div class="player-select-row">
-      <select class="compare-player-select">
-        <option value="">Select Player</option>
-        <option value="22707648">Cai</option>
-        <option value="86928092">Rich</option>
-        <option value="99364420">Gui</option>
-        <option value="84014562">King</option>
-        <option value="116427069">Pina</option>
-        <option value="54641684">Salim</option>
-        <option value="86960581">Tiago</option>
-        <option value="100021819">Plinio</option>
-        <option value="47312085">Mateus</option>
-        <option value="52530952">Avx</option>
-        <option value="1479057070">Blues</option>
-      </select>
-    </div>
-    <div class="player-select-row">
-      <select class="compare-player-select">
-        <option value="">Select Player</option>
-        <option value="22707648">Cai</option>
-        <option value="86928092">Rich</option>
-        <option value="99364420">Gui</option>
-        <option value="84014562">King</option>
-        <option value="116427069">Pina</option>
-        <option value="54641684">Salim</option>
-        <option value="86960581">Tiago</option>
-        <option value="100021819">Plinio</option>
-        <option value="47312085">Mateus</option>
-        <option value="52530952">Avx</option>
-        <option value="1479057070">Blues</option>
-      </select>
-    </div>
-  </div>
-  <div class="form-row" style="margin-top: 12px;">
-    <button id="addPlayerBtn" class="btn-secondary">+ Add Player</button>
-    <button id="compareBtn">Compare</button>
-  </div>
-
-  <div id="compareResults" class="compare-results">
-    <div class="filters">
-      <div class="filter-row">
-        <input type="text" id="compareFilterName" placeholder="Filter by name...">
-        <div class="filter-group">
-          <label>Games:</label>
-          <input type="number" id="compareFilterGamesMin" placeholder="Min" min="0">
-          <span>-</span>
-          <input type="number" id="compareFilterGamesMax" placeholder="Max" min="0">
+        <div class="stat" data-stat="playTime">
+          <div class="stat-value" id="summaryDuration">-</div>
+          <div class="stat-label">Play Time</div>
+        </div>
+        <div class="stat loss" data-stat="abandons">
+          <div class="stat-value"><span id="summaryAbandons">-</span> <span id="summaryAbandonRate" class="stat-pct"></span></div>
+          <div class="stat-label">Abandons</div>
         </div>
       </div>
-      <div class="filter-row">
-        <div class="filter-group">
-          <label>Win Rate:</label>
-          <input type="number" id="compareFilterWinRateMin" placeholder="Min %" min="0" max="100">
-          <span>-</span>
-          <input type="number" id="compareFilterWinRateMax" placeholder="Max %" min="0" max="100">
-        </div>
-        <div class="filter-group">
-          <label>Top:</label>
-          <input type="number" id="compareFilterTopX" placeholder="All" min="1">
-        </div>
-        <div class="filter-group">
-          <label>Sort:</label>
-          <select id="compareSortBy">
-            <option value="games-desc">Games (High)</option>
-            <option value="games-asc">Games (Low)</option>
-            <option value="winrate-desc">Win Rate (High)</option>
-            <option value="winrate-asc">Win Rate (Low)</option>
-            <option value="name-asc">Name (A-Z)</option>
-            <option value="name-desc">Name (Z-A)</option>
-          </select>
-        </div>
-        <button id="compareClearFiltersBtn" class="btn-secondary">Clear</button>
-      </div>
+      <!-- Multi-player summaries (column layout) -->
+      <div class="multi-player-summaries" id="multiPlayerSummary" style="display: none;"></div>
     </div>
-    <div class="compare-table-wrapper">
-      <table class="compare-table">
-        <thead id="compareTableHead">
-          <tr>
-            <th>Hero</th>
-          </tr>
-        </thead>
-        <tbody id="compareTableBody"></tbody>
-      </table>
-    </div>
-    <div class="compare-summaries" id="compareSummaries"></div>
-  </div>
   </div>
 
   <script>
     const API_BASE = 'https://api.opendota.com/api';
 
-    const knownPlayersSelect = document.getElementById('knownPlayers');
-    const playerIdInput = document.getElementById('playerId');
-    const heroSearch = document.getElementById('heroSearch');
-    const heroDropdown = document.getElementById('heroDropdown');
-    const heroIdInput = document.getElementById('heroId');
-    const searchBtn = document.getElementById('searchBtn');
-    const resultsDiv = document.getElementById('results');
+    const playerSelect = document.getElementById('playerSelect');
+    const playerIdInput = document.getElementById('playerIdInput');
+    const addPlayerBtn = document.getElementById('addPlayerBtn');
+    const selectedPlayersDiv = document.getElementById('selectedPlayers');
     const errorDiv = document.getElementById('error');
+    const heroesTableContainer = document.getElementById('heroesTableContainer');
+    const heroesTableBody = document.getElementById('heroesTableBody');
+    const tableHead = document.getElementById('tableHead');
 
     let allHeroes = [];
-    let highlightedIndex = -1;
+    let selectedPlayers = []; // Array of {id, name, matches}
+    let cachedPlayerMatches = {};
 
-    // Populate hero dropdown
+    const knownPlayers = {
+      '22707648': 'Cai',
+      '86928092': 'Rich',
+      '99364420': 'Gui',
+      '84014562': 'King',
+      '116427069': 'Pina',
+      '54641684': 'Salim',
+      '86960581': 'Tiago',
+      '100021819': 'Plinio',
+      '47312085': 'Mateus',
+      '52530952': 'Avx',
+      '1479057070': 'Blues'
+    };
+
+    // Stratz API
+    const STRATZ_TOKEN = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJTdWJqZWN0IjoiNmJmMDhhNjAtMjdkZS00OTg0LWE5ZWQtM2JjYTU1NDgwZDMwIiwiU3RlYW1JZCI6IjIyNzA3NjQ4IiwiQVBJVXNlciI6InRydWUiLCJuYmYiOjE3NzE5NTQzMDksImV4cCI6MTgwMzQ5MDMwOSwiaWF0IjoxNzcxOTU0MzA5LCJpc3MiOiJodHRwczovL2FwaS5zdHJhdHouY29tIn0.Wo1ZQCxCa-fMNjXmiVes3jfugG5NU5TBnaX-uddg5JQ';
+    const STRATZ_API = 'https://api.stratz.com/graphql';
+
+    // Guild search elements
+    const guildSearchInput = document.getElementById('guildSearchInput');
+    const guildSearchBtn = document.getElementById('guildSearchBtn');
+    const guildResult = document.getElementById('guildResult');
+    const guildNameEl = document.getElementById('guildName');
+    const guildTagEl = document.getElementById('guildTag');
+    const guildMetaEl = document.getElementById('guildMeta');
+    const guildMembersEl = document.getElementById('guildMembers');
+    const addAllGuildBtn = document.getElementById('addAllGuildBtn');
+
+    let currentGuildMembers = [];
+
+    async function stratzQuery(query) {
+      const response = await fetch(STRATZ_API, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${STRATZ_TOKEN}`
+        },
+        body: JSON.stringify({ query })
+      });
+      return await response.json();
+    }
+
+    async function searchGuild(searchTerm) {
+      // If numeric, try direct guild ID lookup
+      if (/^\d+$/.test(searchTerm)) {
+        return await getGuildById(parseInt(searchTerm));
+      }
+
+      // Otherwise search by tag
+      const searchQuery = `
+        query {
+          stratz {
+            search(request: { query: "${searchTerm}", searchType: [GUILDS] }) {
+              guild {
+                id
+                name
+                tag
+                memberCount
+              }
+            }
+          }
+        }
+      `;
+
+      const result = await stratzQuery(searchQuery);
+      const guild = result.data?.stratz?.search?.guild;
+
+      if (!guild) {
+        throw new Error('Guild not found. Try searching by exact tag (e.g., "FATA-") or guild ID.');
+      }
+
+      return await getGuildById(guild.id);
+    }
+
+    async function getGuildById(guildId) {
+      const query = `
+        query {
+          guild(id: ${guildId}) {
+            id
+            name
+            tag
+            memberCount
+            region
+            members {
+              steamAccountId
+              matchCount
+              steamAccount {
+                name
+              }
+            }
+          }
+        }
+      `;
+
+      const result = await stratzQuery(query);
+      const guild = result.data?.guild;
+
+      if (!guild) {
+        throw new Error('Guild not found');
+      }
+
+      return guild;
+    }
+
+    function renderGuildResult(guild) {
+      currentGuildMembers = guild.members.map(m => ({
+        id: String(m.steamAccountId),
+        name: m.steamAccount?.name || `Player ${m.steamAccountId}`,
+        matchCount: m.matchCount
+      })).sort((a, b) => b.matchCount - a.matchCount);
+
+      guildNameEl.textContent = guild.name;
+      guildTagEl.textContent = `[${guild.tag}] #${guild.id}`;
+
+      const regions = { 1: 'NA', 2: 'SA', 3: 'Europe', 4: 'CIS', 5: 'China', 6: 'SEA' };
+      guildMetaEl.textContent = `${guild.memberCount} members • ${regions[guild.region] || 'Unknown region'}`;
+
+      renderGuildMembers();
+      guildResult.classList.remove('hidden');
+    }
+
+    function renderGuildMembers() {
+      guildMembersEl.innerHTML = currentGuildMembers.map(m => {
+        const isAdded = selectedPlayers.some(p => p.id === m.id);
+        return `
+          <div class="guild-member ${isAdded ? 'added' : ''}" data-id="${m.id}" data-name="${m.name.replace(/"/g, '&quot;')}">
+            <span>${m.name}</span>
+            <button>+</button>
+          </div>
+        `;
+      }).join('');
+
+      // Add click handlers
+      guildMembersEl.querySelectorAll('.guild-member button').forEach(btn => {
+        btn.addEventListener('click', (e) => {
+          const member = e.target.closest('.guild-member');
+          const id = member.dataset.id;
+          const name = member.dataset.name;
+          addPlayer(id, name);
+          renderGuildMembers();
+        });
+      });
+    }
+
+    function addAllGuildMembers() {
+      currentGuildMembers.forEach(m => {
+        if (!selectedPlayers.some(p => p.id === m.id)) {
+          selectedPlayers.push({ id: m.id, name: m.name, matches: null });
+        }
+      });
+      renderSelectedPlayers();
+      renderGuildMembers();
+      loadAllPlayersData();
+    }
+
+    guildSearchBtn.addEventListener('click', async () => {
+      const searchTerm = guildSearchInput.value.trim();
+      if (!searchTerm) return;
+
+      errorDiv.textContent = '';
+      guildSearchBtn.disabled = true;
+      guildSearchBtn.textContent = 'Searching...';
+
+      try {
+        const guild = await searchGuild(searchTerm);
+        renderGuildResult(guild);
+      } catch (e) {
+        errorDiv.textContent = e.message || 'Failed to search guild';
+        guildResult.classList.add('hidden');
+      } finally {
+        guildSearchBtn.disabled = false;
+        guildSearchBtn.textContent = 'Search';
+      }
+    });
+
+    guildSearchInput.addEventListener('keypress', (e) => {
+      if (e.key === 'Enter') guildSearchBtn.click();
+    });
+
+    addAllGuildBtn.addEventListener('click', addAllGuildMembers);
+
+    // Load heroes list
     async function loadHeroes() {
       try {
         const res = await fetch(`${API_BASE}/heroes`);
@@ -640,227 +757,315 @@
       }
     }
 
-    function renderHeroOptions(filter = '') {
-      const filtered = allHeroes.filter(h =>
-        h.localized_name.toLowerCase().includes(filter.toLowerCase())
-      );
-      highlightedIndex = -1;
-      heroDropdown.innerHTML = filtered.map((hero, i) =>
-        `<div class="hero-option" data-id="${hero.id}" data-name="${hero.localized_name}">${hero.localized_name}</div>`
-      ).join('');
+    // Player selection
+    playerSelect.addEventListener('change', () => {
+      const id = playerSelect.value;
+      if (id) {
+        const name = playerSelect.options[playerSelect.selectedIndex].text;
+        addPlayer(id, name);
+        playerSelect.value = '';
+      }
+    });
+
+    function addPlayerById() {
+      const id = playerIdInput.value.trim();
+      if (id && /^\d+$/.test(id)) {
+        const name = knownPlayers[id] || `Player ${id}`;
+        addPlayer(id, name);
+        playerIdInput.value = '';
+      }
     }
 
-    function selectHero(id, name) {
-      heroIdInput.value = id;
-      heroSearch.value = name;
-      heroDropdown.classList.remove('visible');
+    addPlayerBtn.addEventListener('click', addPlayerById);
+
+    playerIdInput.addEventListener('keypress', (e) => {
+      if (e.key === 'Enter') {
+        addPlayerById();
+      }
+    });
+
+    function addPlayer(id, name) {
+      if (selectedPlayers.find(p => p.id === id)) return;
+      selectedPlayers.push({ id, name, matches: null });
+      renderSelectedPlayers();
+      loadAllPlayersData();
     }
 
-    heroSearch.addEventListener('focus', () => {
-      renderHeroOptions(heroSearch.value);
-      heroDropdown.classList.add('visible');
-    });
-
-    heroSearch.addEventListener('input', () => {
-      renderHeroOptions(heroSearch.value);
-      heroDropdown.classList.add('visible');
-      heroIdInput.value = '';
-    });
-
-    heroSearch.addEventListener('keydown', (e) => {
-      const options = heroDropdown.querySelectorAll('.hero-option');
-      if (e.key === 'ArrowDown') {
-        e.preventDefault();
-        highlightedIndex = Math.min(highlightedIndex + 1, options.length - 1);
-      } else if (e.key === 'ArrowUp') {
-        e.preventDefault();
-        highlightedIndex = Math.max(highlightedIndex - 1, 0);
-      } else if (e.key === 'Enter' && highlightedIndex >= 0) {
-        e.preventDefault();
-        const opt = options[highlightedIndex];
-        selectHero(opt.dataset.id, opt.dataset.name);
-      } else if (e.key === 'Escape') {
-        heroDropdown.classList.remove('visible');
-      }
-      options.forEach((opt, i) => opt.classList.toggle('highlighted', i === highlightedIndex));
-    });
-
-    heroDropdown.addEventListener('click', (e) => {
-      if (e.target.classList.contains('hero-option')) {
-        selectHero(e.target.dataset.id, e.target.dataset.name);
-      }
-    });
-
-    document.addEventListener('click', (e) => {
-      if (!e.target.closest('.hero-search')) {
-        heroDropdown.classList.remove('visible');
-      }
-    });
-
-    // Sync known players dropdown with input
-    knownPlayersSelect.addEventListener('change', () => {
-      if (knownPlayersSelect.value) {
-        playerIdInput.value = knownPlayersSelect.value;
-        hideTableIfNoCache(knownPlayersSelect.value);
-      }
-    });
-
-    playerIdInput.addEventListener('input', () => {
-      hideTableIfNoCache(playerIdInput.value.trim());
-    });
-
-    function hideTableIfNoCache(playerId) {
-      if (!cachedPlayerHeroes[playerId]) {
+    function removePlayer(id) {
+      selectedPlayers = selectedPlayers.filter(p => p.id !== id);
+      renderSelectedPlayers();
+      if (currentGuildMembers.length > 0) renderGuildMembers();
+      if (selectedPlayers.length > 0) {
+        renderTable();
+        updateUrlParams();
+      } else {
         heroesTableContainer.classList.remove('visible');
-        resultsDiv.classList.remove('visible');
+        updateUrlParams();
       }
     }
 
-    // Search handler
-    searchBtn.addEventListener('click', async () => {
-      const playerId = playerIdInput.value.trim();
-      const heroId = heroIdInput.value;
+    function renderSelectedPlayers() {
+      selectedPlayersDiv.innerHTML = selectedPlayers.map(p => `
+        <div class="player-tag">
+          ${p.name}
+          <span class="remove" data-id="${p.id}">&times;</span>
+        </div>
+      `).join('');
 
+      selectedPlayersDiv.querySelectorAll('.remove').forEach(btn => {
+        btn.addEventListener('click', () => removePlayer(btn.dataset.id));
+      });
+    }
+
+    async function fetchPlayerMatches(playerId) {
+      if (!cachedPlayerMatches[playerId]) {
+        const res = await fetch(`${API_BASE}/players/${playerId}/matches?significant=0`);
+        if (!res.ok) throw new Error('Player not found');
+        cachedPlayerMatches[playerId] = await res.json();
+      }
+      return cachedPlayerMatches[playerId];
+    }
+
+    async function loadAllPlayersData() {
       errorDiv.textContent = '';
-      resultsDiv.classList.remove('visible');
-
-      if (!playerId) {
-        errorDiv.textContent = 'Please enter a Player ID';
-        return;
-      }
-      if (!heroId) {
-        errorDiv.textContent = 'Please select a hero';
-        return;
-      }
-
-      searchBtn.disabled = true;
-      searchBtn.textContent = 'Loading...';
 
       try {
-        const res = await fetch(
-          `${API_BASE}/players/${playerId}/wl?hero_id=${heroId}&significant=0`
-        );
+        const promises = selectedPlayers.map(async (p) => {
+          if (!p.matches) {
+            p.matches = await fetchPlayerMatches(p.id);
+          }
+          return p;
+        });
 
-        if (!res.ok) {
-          throw new Error('Player not found');
-        }
-
-        const data = await res.json();
-        const total = data.win + data.lose;
-        const winRate = total > 0 ? ((data.win / total) * 100).toFixed(2) : '0.00';
-
-        document.getElementById('selectedHeroName').textContent = heroSearch.value;
-        document.getElementById('totalMatches').textContent = total;
-        document.getElementById('wins').textContent = data.win;
-        document.getElementById('losses').textContent = data.lose;
-        document.getElementById('winRate').textContent = `${winRate}%`;
-
-        resultsDiv.classList.add('visible');
-        heroesTableContainer.classList.remove('visible');
+        await Promise.all(promises);
+        renderTable();
+        heroesTableContainer.classList.add('visible');
+        updateUrlParams();
       } catch (e) {
         errorDiv.textContent = e.message || 'Failed to fetch data';
-      } finally {
-        searchBtn.disabled = false;
-        searchBtn.textContent = 'Search';
       }
-    });
+    }
 
-    // All Heroes feature
-    const allHeroesBtn = document.getElementById('allHeroesBtn');
-    const heroesTableContainer = document.getElementById('heroesTableContainer');
-    const heroesTableBody = document.getElementById('heroesTableBody');
-    let heroesData = [];
-    let cachedPlayerHeroes = {};  // Cache: playerId -> heroesData
-    let currentSort = { column: 'games', direction: 'desc' };
+    function aggregateMatchesByHero(matches) {
+      const heroMap = {};
 
-    allHeroesBtn.addEventListener('click', async () => {
-      const playerId = playerIdInput.value.trim();
-
-      errorDiv.textContent = '';
-      resultsDiv.classList.remove('visible');
-      heroesTableContainer.classList.remove('visible');
-
-      if (!playerId) {
-        errorDiv.textContent = 'Please enter a Player ID';
-        return;
-      }
-
-      // Check cache first
-      if (cachedPlayerHeroes[playerId]) {
-        heroesData = cachedPlayerHeroes[playerId];
-        sortHeroesData();
-        renderHeroesTable();
-        heroesTableContainer.classList.add('visible');
-        return;
-      }
-
-      allHeroesBtn.disabled = true;
-      allHeroesBtn.textContent = 'Loading...';
-
-      try {
-        const res = await fetch(
-          `${API_BASE}/players/${playerId}/heroes?significant=0`
-        );
-
-        if (!res.ok) {
-          throw new Error('Player not found');
+      matches.forEach(match => {
+        const heroId = match.hero_id;
+        if (!heroMap[heroId]) {
+          const hero = allHeroes.find(h => h.id === heroId);
+          heroMap[heroId] = {
+            heroId,
+            name: hero ? hero.localized_name : `Unknown (${heroId})`,
+            games: 0,
+            win: 0,
+            loss: 0,
+            duration: 0,
+            abandons: 0
+          };
         }
 
-        const data = await res.json();
+        heroMap[heroId].games++;
+        heroMap[heroId].duration += match.duration || 0;
+        if (match.leaver_status >= 2) {
+          heroMap[heroId].abandons++;
+        }
+        const isRadiant = match.player_slot < 128;
+        const won = (isRadiant && match.radiant_win) || (!isRadiant && !match.radiant_win);
+        if (won) {
+          heroMap[heroId].win++;
+        } else {
+          heroMap[heroId].loss++;
+        }
+      });
 
-        // Map hero IDs to names and calculate stats
-        heroesData = data
-          .filter(h => h.games > 0)
-          .map(h => {
-            const hero = allHeroes.find(hero => hero.id === h.hero_id);
-            const loss = h.games - h.win;
-            const winRate = h.games > 0 ? (h.win / h.games) * 100 : 0;
-            return {
-              heroId: h.hero_id,
-              name: hero ? hero.localized_name : `Unknown (${h.hero_id})`,
-              games: h.games,
-              win: h.win,
-              loss: loss,
-              winRate: winRate
-            };
-          });
+      return Object.values(heroMap).map(h => ({
+        ...h,
+        winRate: h.games > 0 ? (h.win / h.games) * 100 : 0
+      }));
+    }
 
-        // Cache the data
-        cachedPlayerHeroes[playerId] = heroesData;
+    function formatDuration(seconds) {
+      const days = Math.floor(seconds / 86400);
+      const hours = Math.floor((seconds % 86400) / 3600);
+      const minutes = Math.floor((seconds % 3600) / 60);
+      if (days > 0) return `${days}d ${hours}h`;
+      if (hours > 0) return `${hours}h ${minutes}m`;
+      return `${minutes}m`;
+    }
 
-        sortHeroesData();
-        renderHeroesTable();
-        heroesTableContainer.classList.add('visible');
-      } catch (e) {
-        errorDiv.textContent = e.message || 'Failed to fetch data';
-      } finally {
-        allHeroesBtn.disabled = false;
-        allHeroesBtn.textContent = 'All Heroes';
+    // Filters
+    const filterName = document.getElementById('filterName');
+    const filterGameMode = document.getElementById('filterGameMode');
+    const filterDateFrom = document.getElementById('filterDateFrom');
+    const filterDateTo = document.getElementById('filterDateTo');
+    const filterGamesMin = document.getElementById('filterGamesMin');
+    const filterGamesMax = document.getElementById('filterGamesMax');
+    const filterWinRateMin = document.getElementById('filterWinRateMin');
+    const filterWinRateMax = document.getElementById('filterWinRateMax');
+    const filterTopX = document.getElementById('filterTopX');
+    const filterUnplayed = document.getElementById('filterUnplayed');
+    const sortBy = document.getElementById('sortBy');
+    const clearFiltersBtn = document.getElementById('clearFiltersBtn');
+
+    function getFilteredData() {
+      const dateFrom = filterDateFrom.value ? new Date(filterDateFrom.value).getTime() / 1000 : 0;
+      const dateTo = filterDateTo.value ? new Date(filterDateTo.value).getTime() / 1000 + 86400 : Infinity;
+      const gameMode = filterGameMode.value;
+
+      // Game mode filter function
+      // lobby_type: 7 = Ranked, game_mode: 23 = Turbo
+      const matchesGameModeFilter = (m) => {
+        if (gameMode === 'all') return true;
+        if (gameMode === 'ranked') return m.lobby_type === 7;
+        if (gameMode === 'turbo') return m.game_mode === 23;
+        if (gameMode === 'normal') return m.lobby_type !== 7 && m.game_mode !== 23;
+        return true;
+      };
+
+      // Aggregate each player's matches
+      const playersHeroData = selectedPlayers.map(p => {
+        const matches = p.matches || [];
+        const filtered = matches.filter(m =>
+          m.start_time >= dateFrom &&
+          m.start_time <= dateTo &&
+          matchesGameModeFilter(m)
+        );
+        return aggregateMatchesByHero(filtered);
+      });
+
+      // Single player mode
+      if (selectedPlayers.length === 1) {
+        let filtered = playersHeroData[0];
+
+        // Unplayed only
+        if (filterUnplayed.checked) {
+          const playedHeroIds = new Set(filtered.map(h => h.heroId));
+          filtered = allHeroes
+            .filter(h => !playedHeroIds.has(h.id))
+            .map(h => ({
+              heroId: h.id,
+              name: h.localized_name,
+              games: 0, win: 0, loss: 0, duration: 0, abandons: 0, winRate: 0
+            }));
+        }
+
+        filtered = applyCommonFilters(filtered);
+        return { mode: 'single', data: filtered };
       }
-    });
 
-    function sortHeroesData() {
-      heroesData.sort((a, b) => {
-        let valA = a[currentSort.column];
-        let valB = b[currentSort.column];
+      // Multi-player mode
+      const heroIds = new Set();
+      playersHeroData.forEach(data => data.forEach(h => heroIds.add(h.heroId)));
 
+      let filtered = [];
+      heroIds.forEach(heroId => {
+        const hero = allHeroes.find(h => h.id === heroId);
+        filtered.push({
+          heroId,
+          name: hero ? hero.localized_name : `Unknown (${heroId})`,
+          players: playersHeroData.map(data => data.find(h => h.heroId === heroId) || null)
+        });
+      });
+
+      // Apply name filter
+      const nameFilter = filterName.value.toLowerCase().trim();
+      if (nameFilter) {
+        filtered = filtered.filter(h => h.name.toLowerCase().includes(nameFilter));
+      }
+
+      // Filter by games range (any player)
+      const gamesMin = parseInt(filterGamesMin.value) || 0;
+      const gamesMax = parseInt(filterGamesMax.value) || Infinity;
+      filtered = filtered.filter(h => h.players.some(p => p && p.games >= gamesMin && p.games <= gamesMax));
+
+      // Filter by win rate range (any player)
+      const winRateMin = parseFloat(filterWinRateMin.value) || 0;
+      const winRateMax = parseFloat(filterWinRateMax.value) || 100;
+      filtered = filtered.filter(h => h.players.some(p => p && p.winRate >= winRateMin && p.winRate <= winRateMax));
+
+      // Sort
+      const [sortField, sortDir] = sortBy.value.split('-');
+      filtered.sort((a, b) => {
+        let valA, valB;
+        if (sortField === 'name') {
+          valA = a.name.toLowerCase();
+          valB = b.name.toLowerCase();
+        } else if (sortField === 'games') {
+          valA = Math.max(...a.players.map(p => p?.games || 0));
+          valB = Math.max(...b.players.map(p => p?.games || 0));
+        } else if (sortField === 'winRate') {
+          valA = Math.max(...a.players.map(p => p?.winRate || 0));
+          valB = Math.max(...b.players.map(p => p?.winRate || 0));
+        }
+        return sortDir === 'asc' ? (valA > valB ? 1 : -1) : (valA < valB ? 1 : -1);
+      });
+
+      // Top X
+      const topX = parseInt(filterTopX.value);
+      if (topX > 0) filtered = filtered.slice(0, topX);
+
+      return { mode: 'multi', data: filtered, playersHeroData };
+    }
+
+    function applyCommonFilters(filtered) {
+      const nameFilter = filterName.value.toLowerCase().trim();
+      if (nameFilter) {
+        filtered = filtered.filter(h => h.name.toLowerCase().includes(nameFilter));
+      }
+
+      const gamesMin = parseInt(filterGamesMin.value) || 0;
+      const gamesMax = parseInt(filterGamesMax.value) || Infinity;
+      filtered = filtered.filter(h => h.games >= gamesMin && h.games <= gamesMax);
+
+      const winRateMin = parseFloat(filterWinRateMin.value) || 0;
+      const winRateMax = parseFloat(filterWinRateMax.value) || 100;
+      filtered = filtered.filter(h => h.winRate >= winRateMin && h.winRate <= winRateMax);
+
+      // Sort
+      const [sortField, sortDir] = sortBy.value.split('-');
+      filtered.sort((a, b) => {
+        let valA = a[sortField];
+        let valB = b[sortField];
         if (typeof valA === 'string') {
           valA = valA.toLowerCase();
           valB = valB.toLowerCase();
         }
-
-        if (currentSort.direction === 'asc') {
-          return valA > valB ? 1 : valA < valB ? -1 : 0;
-        } else {
-          return valA < valB ? 1 : valA > valB ? -1 : 0;
-        }
+        return sortDir === 'asc' ? (valA > valB ? 1 : -1) : (valA < valB ? 1 : -1);
       });
+
+      const topX = parseInt(filterTopX.value);
+      if (topX > 0) filtered = filtered.slice(0, topX);
+
+      return filtered;
     }
 
-    function renderHeroesTable() {
-      const filtered = getFilteredHeroes();
-      heroesTableBody.innerHTML = filtered.map(h => `
-        <tr data-hero-id="${h.heroId}" data-hero-name="${h.name}" style="cursor: pointer;">
+    function renderTable() {
+      if (selectedPlayers.length === 0) return;
+
+      const result = getFilteredData();
+
+      if (result.mode === 'single') {
+        renderSinglePlayerTable(result.data);
+        renderSinglePlayerSummary(result.data);
+      } else {
+        renderMultiPlayerTable(result.data);
+        renderMultiPlayerSummary(result.data);
+      }
+    }
+
+    function renderSinglePlayerTable(data) {
+      tableHead.innerHTML = `
+        <tr>
+          <th data-sort="name">Hero</th>
+          <th data-sort="games">Matches</th>
+          <th data-sort="win">Wins</th>
+          <th data-sort="loss">Losses</th>
+          <th data-sort="winRate">Win Rate</th>
+        </tr>
+      `;
+
+      heroesTableBody.innerHTML = data.map(h => `
+        <tr>
           <td>${h.name}</td>
           <td>${h.games}</td>
           <td class="win">${h.win}</td>
@@ -868,358 +1073,17 @@
           <td>${h.winRate.toFixed(2)}%</td>
         </tr>
       `).join('');
-
-      // Update sort indicators
-      document.querySelectorAll('.heroes-table th').forEach(th => {
-        th.classList.remove('sorted-asc', 'sorted-desc');
-        if (th.dataset.sort === currentSort.column) {
-          th.classList.add(`sorted-${currentSort.direction}`);
-        }
-      });
-
-      // Update summary
-      const totalGames = filtered.reduce((sum, h) => sum + h.games, 0);
-      const totalWins = filtered.reduce((sum, h) => sum + h.win, 0);
-      const totalLosses = filtered.reduce((sum, h) => sum + h.loss, 0);
-      const overallWinRate = totalGames > 0 ? ((totalWins / totalGames) * 100).toFixed(2) : '0.00';
-
-      document.getElementById('summaryTitle').textContent = `Summary (${filtered.length} heroes)`;
-      document.getElementById('summaryMatches').textContent = totalGames;
-      document.getElementById('summaryWins').textContent = totalWins;
-      document.getElementById('summaryLosses').textContent = totalLosses;
-      document.getElementById('summaryWinRate').textContent = `${overallWinRate}%`;
-
-      // Add click handlers to rows
-      heroesTableBody.querySelectorAll('tr').forEach(row => {
-        row.addEventListener('click', () => {
-          const heroId = row.dataset.heroId;
-          const heroName = row.dataset.heroName;
-          const heroData = heroesData.find(h => h.heroId == heroId);
-
-          if (heroData) {
-            document.getElementById('selectedHeroName').textContent = heroName;
-            document.getElementById('totalMatches').textContent = heroData.games;
-            document.getElementById('wins').textContent = heroData.win;
-            document.getElementById('losses').textContent = heroData.loss;
-            document.getElementById('winRate').textContent = `${heroData.winRate.toFixed(2)}%`;
-
-            // Update hero search to show selected hero
-            heroSearch.value = heroName;
-            heroIdInput.value = heroId;
-
-            // Highlight selected row
-            heroesTableBody.querySelectorAll('tr').forEach(r => r.classList.remove('selected'));
-            row.classList.add('selected');
-
-            resultsDiv.classList.add('visible');
-            resultsDiv.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
-          }
-        });
-      });
     }
 
-    document.querySelectorAll('.heroes-table th').forEach(th => {
-      th.addEventListener('click', () => {
-        const column = th.dataset.sort;
-        if (currentSort.column === column) {
-          currentSort.direction = currentSort.direction === 'asc' ? 'desc' : 'asc';
-        } else {
-          currentSort.column = column;
-          currentSort.direction = column === 'name' ? 'asc' : 'desc';
-        }
-        sortHeroesData();
-        renderHeroesTable();
-      });
-    });
-
-    // Filters
-    const filterName = document.getElementById('filterName');
-    const filterGamesMin = document.getElementById('filterGamesMin');
-    const filterGamesMax = document.getElementById('filterGamesMax');
-    const filterWinRateMin = document.getElementById('filterWinRateMin');
-    const filterWinRateMax = document.getElementById('filterWinRateMax');
-    const filterTopX = document.getElementById('filterTopX');
-    const clearFiltersBtn = document.getElementById('clearFiltersBtn');
-
-    function getFilteredHeroes() {
-      let filtered = [...heroesData];
-
-      // Filter by name
-      const nameFilter = filterName.value.toLowerCase().trim();
-      if (nameFilter) {
-        filtered = filtered.filter(h => h.name.toLowerCase().includes(nameFilter));
-      }
-
-      // Filter by games range
-      const gamesMin = parseInt(filterGamesMin.value) || 0;
-      const gamesMax = parseInt(filterGamesMax.value) || Infinity;
-      filtered = filtered.filter(h => h.games >= gamesMin && h.games <= gamesMax);
-
-      // Filter by win rate range
-      const winRateMin = parseFloat(filterWinRateMin.value) || 0;
-      const winRateMax = parseFloat(filterWinRateMax.value) || 100;
-      filtered = filtered.filter(h => h.winRate >= winRateMin && h.winRate <= winRateMax);
-
-      // Sort
-      filtered.sort((a, b) => {
-        let valA = a[currentSort.column];
-        let valB = b[currentSort.column];
-
-        if (typeof valA === 'string') {
-          valA = valA.toLowerCase();
-          valB = valB.toLowerCase();
-        }
-
-        if (currentSort.direction === 'asc') {
-          return valA > valB ? 1 : valA < valB ? -1 : 0;
-        } else {
-          return valA < valB ? 1 : valA > valB ? -1 : 0;
-        }
-      });
-
-      // Apply top X
-      const topX = parseInt(filterTopX.value);
-      if (topX > 0) {
-        filtered = filtered.slice(0, topX);
-      }
-
-      return filtered;
-    }
-
-    function applyFilters() {
-      renderHeroesTable();
-    }
-
-    [filterName, filterGamesMin, filterGamesMax, filterWinRateMin, filterWinRateMax, filterTopX].forEach(input => {
-      input.addEventListener('input', applyFilters);
-    });
-
-    clearFiltersBtn.addEventListener('click', () => {
-      filterName.value = '';
-      filterGamesMin.value = '';
-      filterGamesMax.value = '';
-      filterWinRateMin.value = '';
-      filterWinRateMax.value = '';
-      filterTopX.value = '';
-      applyFilters();
-    });
-
-    // Compare Players feature
-    const comparePlayers = document.getElementById('comparePlayers');
-    const addPlayerBtn = document.getElementById('addPlayerBtn');
-    const compareBtn = document.getElementById('compareBtn');
-    const compareResults = document.getElementById('compareResults');
-    const compareTableHead = document.getElementById('compareTableHead');
-    const compareTableBody = document.getElementById('compareTableBody');
-    const compareSummaries = document.getElementById('compareSummaries');
-    let comparisonData = [];
-    let comparePlayerNames = [];
-    let comparePlayersData = [];
-
-    const playerOptionsHTML = `
-      <option value="">Select Player</option>
-      <option value="22707648">Cai</option>
-      <option value="86928092">Rich</option>
-      <option value="99364420">Gui</option>
-      <option value="84014562">King</option>
-      <option value="116427069">Pina</option>
-      <option value="54641684">Salim</option>
-      <option value="86960581">Tiago</option>
-      <option value="100021819">Plinio</option>
-      <option value="47312085">Mateus</option>
-      <option value="52530952">Avx</option>
-      <option value="1479057070">Blues</option>
-    `;
-
-    function updateRemoveButtons() {
-      const rows = comparePlayers.querySelectorAll('.player-select-row');
-      rows.forEach(row => {
-        const existingBtn = row.querySelector('.remove-player-btn');
-        if (rows.length > 2 && !existingBtn) {
-          const btn = document.createElement('button');
-          btn.className = 'remove-player-btn';
-          btn.textContent = '×';
-          btn.addEventListener('click', () => {
-            row.remove();
-            updateRemoveButtons();
-          });
-          row.appendChild(btn);
-        } else if (rows.length <= 2 && existingBtn) {
-          existingBtn.remove();
-        }
-      });
-    }
-
-    addPlayerBtn.addEventListener('click', () => {
-      const row = document.createElement('div');
-      row.className = 'player-select-row';
-      row.innerHTML = `<select class="compare-player-select">${playerOptionsHTML}</select>`;
-      comparePlayers.appendChild(row);
-      updateRemoveButtons();
-    });
-
-    // Compare filters
-    const compareFilterName = document.getElementById('compareFilterName');
-    const compareFilterGamesMin = document.getElementById('compareFilterGamesMin');
-    const compareFilterGamesMax = document.getElementById('compareFilterGamesMax');
-    const compareFilterWinRateMin = document.getElementById('compareFilterWinRateMin');
-    const compareFilterWinRateMax = document.getElementById('compareFilterWinRateMax');
-    const compareFilterTopX = document.getElementById('compareFilterTopX');
-    const compareClearFiltersBtn = document.getElementById('compareClearFiltersBtn');
-
-    compareBtn.addEventListener('click', async () => {
-      const selects = comparePlayers.querySelectorAll('.compare-player-select');
-      const playerIds = Array.from(selects).map(s => s.value).filter(v => v);
-      const playerNames = Array.from(selects).map(s => s.options[s.selectedIndex]?.text || '').filter((_, i) => selects[i].value);
-
-      errorDiv.textContent = '';
-      compareResults.classList.remove('visible');
-
-      if (playerIds.length < 2) {
-        errorDiv.textContent = 'Please select at least 2 players';
-        return;
-      }
-
-      const uniqueIds = new Set(playerIds);
-      if (uniqueIds.size !== playerIds.length) {
-        errorDiv.textContent = 'Please select different players';
-        return;
-      }
-
-      compareBtn.disabled = true;
-      compareBtn.textContent = 'Loading...';
-
-      try {
-        // Fetch all players' data
-        comparePlayersData = await Promise.all(playerIds.map(id => fetchPlayerHeroes(id)));
-        comparePlayerNames = playerNames;
-
-        // Build comparison data
-        const heroIds = new Set();
-        comparePlayersData.forEach(data => data.forEach(h => heroIds.add(h.heroId)));
-
-        comparisonData = [];
-        heroIds.forEach(heroId => {
-          const hero = allHeroes.find(h => h.id === heroId);
-          const entry = {
-            heroId,
-            name: hero ? hero.localized_name : `Unknown (${heroId})`,
-            players: comparePlayersData.map(data => data.find(h => h.heroId === heroId) || null)
-          };
-          comparisonData.push(entry);
-        });
-
-        renderCompareTable();
-        compareResults.classList.add('visible');
-      } catch (e) {
-        errorDiv.textContent = e.message || 'Failed to fetch data';
-      } finally {
-        compareBtn.disabled = false;
-        compareBtn.textContent = 'Compare';
-      }
-    });
-
-    async function fetchPlayerHeroes(playerId) {
-      if (cachedPlayerHeroes[playerId]) {
-        return cachedPlayerHeroes[playerId];
-      }
-
-      const res = await fetch(`${API_BASE}/players/${playerId}/heroes?significant=0`);
-      if (!res.ok) throw new Error('Player not found');
-
-      const data = await res.json();
-      const heroesData = data
-        .filter(h => h.games > 0)
-        .map(h => {
-          const hero = allHeroes.find(hero => hero.id === h.hero_id);
-          const loss = h.games - h.win;
-          const winRate = h.games > 0 ? (h.win / h.games) * 100 : 0;
-          return {
-            heroId: h.hero_id,
-            name: hero ? hero.localized_name : `Unknown (${h.hero_id})`,
-            games: h.games,
-            win: h.win,
-            loss: loss,
-            winRate: winRate
-          };
-        });
-
-      cachedPlayerHeroes[playerId] = heroesData;
-      return heroesData;
-    }
-
-    function getFilteredCompareData() {
-      let filtered = [...comparisonData];
-
-      // Filter by name
-      const nameFilter = compareFilterName.value.toLowerCase().trim();
-      if (nameFilter) {
-        filtered = filtered.filter(h => h.name.toLowerCase().includes(nameFilter));
-      }
-
-      // Filter by games range (any player)
-      const gamesMin = parseInt(compareFilterGamesMin.value) || 0;
-      const gamesMax = parseInt(compareFilterGamesMax.value) || Infinity;
-      filtered = filtered.filter(h => {
-        return h.players.some(p => p && p.games >= gamesMin && p.games <= gamesMax);
-      });
-
-      // Filter by win rate range (any player)
-      const winRateMin = parseFloat(compareFilterWinRateMin.value) || 0;
-      const winRateMax = parseFloat(compareFilterWinRateMax.value) || 100;
-      filtered = filtered.filter(h => {
-        return h.players.some(p => p && p.winRate >= winRateMin && p.winRate <= winRateMax);
-      });
-
-      // Sort by max value across all players
-      const sortValue = document.getElementById('compareSortBy').value;
-      const [sortField, sortDir] = sortValue.split('-');
-
-      filtered.sort((a, b) => {
-        let valA, valB;
-        switch (sortField) {
-          case 'name':
-            valA = a.name.toLowerCase();
-            valB = b.name.toLowerCase();
-            break;
-          case 'games':
-            valA = Math.max(...a.players.map(p => p?.games || 0));
-            valB = Math.max(...b.players.map(p => p?.games || 0));
-            break;
-          case 'winrate':
-            valA = Math.max(...a.players.map(p => p?.winRate || 0));
-            valB = Math.max(...b.players.map(p => p?.winRate || 0));
-            break;
-        }
-        if (sortDir === 'asc') {
-          return valA > valB ? 1 : valA < valB ? -1 : 0;
-        } else {
-          return valA < valB ? 1 : valA > valB ? -1 : 0;
-        }
-      });
-
-      // Apply top X
-      const topX = parseInt(compareFilterTopX.value);
-      if (topX > 0) {
-        filtered = filtered.slice(0, topX);
-      }
-
-      return filtered;
-    }
-
-    function renderCompareTable() {
-      const filtered = getFilteredCompareData();
-
-      // Render table header
-      compareTableHead.innerHTML = `
+    function renderMultiPlayerTable(data) {
+      tableHead.innerHTML = `
         <tr>
           <th>Hero</th>
-          ${comparePlayerNames.map(name => `<th>${name} Games</th><th>WR</th>`).join('')}
+          ${selectedPlayers.map(p => `<th>${p.name} Games</th><th>WR</th>`).join('')}
         </tr>
       `;
 
-      // Find best win rate for each hero (for highlighting)
-      compareTableBody.innerHTML = filtered.map(row => {
+      heroesTableBody.innerHTML = data.map(row => {
         const winRates = row.players.map(p => p?.winRate || 0);
         const maxWinRate = Math.max(...winRates);
         const minWinRate = Math.min(...winRates.filter(wr => wr > 0));
@@ -1233,84 +1097,265 @@
 
         return `<tr><td>${row.name}</td>${playerCells}</tr>`;
       }).join('');
+    }
 
-      // Update summaries
-      const playerStats = comparePlayerNames.map((name, i) => {
-        const stats = filtered.reduce((acc, h) => {
+    function getSummarySubtitle() {
+      const parts = [];
+
+      // Game mode
+      const mode = filterGameMode.value;
+      if (mode !== 'all') {
+        const modeLabels = { ranked: 'Ranked', normal: 'Normal', turbo: 'Turbo' };
+        parts.push(modeLabels[mode]);
+      }
+
+      // Date range
+      const formatDate = (dateStr) => {
+        const d = new Date(dateStr);
+        return d.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
+      };
+
+      if (filterDateFrom.value && filterDateTo.value) {
+        parts.push(`${formatDate(filterDateFrom.value)} - ${formatDate(filterDateTo.value)}`);
+      } else if (filterDateFrom.value) {
+        parts.push(`From ${formatDate(filterDateFrom.value)}`);
+      } else if (filterDateTo.value) {
+        parts.push(`Until ${formatDate(filterDateTo.value)}`);
+      }
+
+      return parts.length > 0 ? ' - ' + parts.join(' - ') : '';
+    }
+
+    function renderSinglePlayerSummary(data) {
+      document.getElementById('singlePlayerSummary').style.display = '';
+      document.getElementById('multiPlayerSummary').style.display = 'none';
+
+      const totalGames = data.reduce((sum, h) => sum + h.games, 0);
+      const totalWins = data.reduce((sum, h) => sum + h.win, 0);
+      const totalLosses = data.reduce((sum, h) => sum + h.loss, 0);
+      const totalDuration = data.reduce((sum, h) => sum + h.duration, 0);
+      const totalAbandons = data.reduce((sum, h) => sum + h.abandons, 0);
+      const overallWinRate = totalGames > 0 ? ((totalWins / totalGames) * 100).toFixed(2) : '0.00';
+      const abandonRate = totalGames > 0 ? ((totalAbandons / totalGames) * 100).toFixed(1) : '0.0';
+
+      const heroCountText = data.length === 1 ? `1 hero - ${data[0].name}` : `${data.length} heroes`;
+      document.getElementById('summaryTitle').textContent = `Summary (${heroCountText})${getSummarySubtitle()}`;
+      document.getElementById('summaryMatches').textContent = totalGames;
+      document.getElementById('summaryWins').textContent = totalWins;
+      document.getElementById('summaryLosses').textContent = totalLosses;
+      document.getElementById('summaryWinRate').textContent = `${overallWinRate}%`;
+      document.getElementById('summaryDuration').textContent = formatDuration(totalDuration);
+      document.getElementById('summaryAbandons').textContent = totalAbandons;
+      document.getElementById('summaryAbandonRate').textContent = `(${abandonRate}%)`;
+    }
+
+    function renderMultiPlayerSummary(data) {
+      document.getElementById('singlePlayerSummary').style.display = 'none';
+      document.getElementById('multiPlayerSummary').style.display = '';
+
+      const heroCountText = data.length === 1 ? `1 hero - ${data[0].name}` : `${data.length} heroes`;
+      document.getElementById('summaryTitle').textContent = `Summary (${heroCountText})${getSummarySubtitle()}`;
+
+      const playerStats = selectedPlayers.map((player, i) => {
+        const stats = data.reduce((acc, h) => {
           const p = h.players[i];
           if (p) {
             acc.games += p.games;
             acc.wins += p.win;
             acc.losses += p.loss;
-            acc.heroCount++;
+            acc.duration += p.duration;
+            acc.abandons += p.abandons;
           }
           return acc;
-        }, { games: 0, wins: 0, losses: 0, heroCount: 0 });
+        }, { games: 0, wins: 0, losses: 0, duration: 0, abandons: 0 });
         stats.winRate = stats.games > 0 ? ((stats.wins / stats.games) * 100).toFixed(2) : '0.00';
-        stats.name = name;
+        stats.abandonRate = stats.games > 0 ? ((stats.abandons / stats.games) * 100).toFixed(1) : '0.0';
+        stats.name = player.name;
         return stats;
       });
 
-      compareSummaries.innerHTML = playerStats.map(stats => `
-        <div class="compare-summary">
-          <h3>${stats.name} (${stats.heroCount} heroes)</h3>
-          <div class="stat-grid">
-            <div class="stat">
-              <div class="stat-value">${stats.games}</div>
-              <div class="stat-label">Matches</div>
-            </div>
-            <div class="stat">
-              <div class="stat-value">${stats.winRate}%</div>
-              <div class="stat-label">Win Rate</div>
-            </div>
-            <div class="stat win">
-              <div class="stat-value">${stats.wins}</div>
-              <div class="stat-label">Wins</div>
-            </div>
-            <div class="stat loss">
-              <div class="stat-value">${stats.losses}</div>
-              <div class="stat-label">Losses</div>
-            </div>
+      const multiSummary = document.getElementById('multiPlayerSummary');
+      multiSummary.innerHTML = playerStats.map(stats => `
+        <div class="player-summary-row">
+          <div class="player-name">${stats.name}</div>
+          <div class="stat-item" data-stat="matches">
+            <div class="value">${stats.games}</div>
+            <div class="label">Matches</div>
+          </div>
+          <div class="stat-item" data-stat="winRate">
+            <div class="value">${stats.winRate}%</div>
+            <div class="label">Win Rate</div>
+          </div>
+          <div class="stat-item win" data-stat="wins">
+            <div class="value">${stats.wins}</div>
+            <div class="label">Wins</div>
+          </div>
+          <div class="stat-item loss" data-stat="losses">
+            <div class="value">${stats.losses}</div>
+            <div class="label">Losses</div>
+          </div>
+          <div class="stat-item" data-stat="playTime">
+            <div class="value">${formatDuration(stats.duration)}</div>
+            <div class="label">Play Time</div>
+          </div>
+          <div class="stat-item loss" data-stat="abandons">
+            <div class="value">${stats.abandons} <span class="stat-pct">(${stats.abandonRate}%)</span></div>
+            <div class="label">Abandons</div>
           </div>
         </div>
       `).join('');
+
+      // Apply stat visibility toggles
+      applyStatToggles();
     }
 
-    // Compare filter listeners
-    const compareSortBy = document.getElementById('compareSortBy');
-
-    [compareFilterName, compareFilterGamesMin, compareFilterGamesMax,
-     compareFilterWinRateMin, compareFilterWinRateMax, compareFilterTopX].forEach(input => {
+    // Filter event listeners
+    [filterName, filterDateFrom, filterDateTo, filterGamesMin, filterGamesMax,
+     filterWinRateMin, filterWinRateMax, filterTopX].forEach(input => {
       input.addEventListener('input', () => {
-        if (comparisonData.length > 0) renderCompareTable();
+        if (selectedPlayers.length > 0) {
+          renderTable();
+          updateUrlParams();
+        }
+      });
+      input.addEventListener('change', () => {
+        if (selectedPlayers.length > 0) {
+          renderTable();
+          updateUrlParams();
+        }
       });
     });
 
-    compareSortBy.addEventListener('change', () => {
-      if (comparisonData.length > 0) renderCompareTable();
+    filterUnplayed.addEventListener('change', () => {
+      if (selectedPlayers.length > 0) {
+        renderTable();
+        updateUrlParams();
+      }
     });
 
-    compareClearFiltersBtn.addEventListener('click', () => {
-      compareFilterName.value = '';
-      compareFilterGamesMin.value = '';
-      compareFilterGamesMax.value = '';
-      compareFilterWinRateMin.value = '';
-      compareFilterWinRateMax.value = '';
-      compareFilterTopX.value = '';
-      compareSortBy.value = 'games-desc';
-      if (comparisonData.length > 0) renderCompareTable();
+    filterGameMode.addEventListener('change', () => {
+      if (selectedPlayers.length > 0) {
+        renderTable();
+        updateUrlParams();
+      }
     });
 
-    // Compare section toggle
-    const compareToggle = document.getElementById('compareToggle');
-    const compareSection = document.getElementById('compareSection');
-
-    compareToggle.addEventListener('click', () => {
-      compareToggle.classList.toggle('open');
-      compareSection.classList.toggle('hidden');
+    sortBy.addEventListener('change', () => {
+      if (selectedPlayers.length > 0) {
+        renderTable();
+        updateUrlParams();
+      }
     });
 
-    loadHeroes();
+    clearFiltersBtn.addEventListener('click', () => {
+      filterName.value = '';
+      filterGameMode.value = 'all';
+      filterDateFrom.value = '';
+      filterDateTo.value = '';
+      filterGamesMin.value = '';
+      filterGamesMax.value = '';
+      filterWinRateMin.value = '';
+      filterWinRateMax.value = '';
+      filterTopX.value = '';
+      filterUnplayed.checked = false;
+      sortBy.value = 'games-desc';
+      if (selectedPlayers.length > 0) {
+        renderTable();
+        updateUrlParams();
+      }
+    });
+
+    // Summary stat toggles
+    const statToggleMap = {
+      showMatches: 'matches',
+      showWinRate: 'winRate',
+      showWins: 'wins',
+      showLosses: 'losses',
+      showPlayTime: 'playTime',
+      showAbandons: 'abandons'
+    };
+
+    function applyStatToggles() {
+      Object.entries(statToggleMap).forEach(([checkboxId, statName]) => {
+        const checkbox = document.getElementById(checkboxId);
+        const show = checkbox.checked;
+
+        // Single player summary
+        document.querySelectorAll(`#singlePlayerSummary [data-stat="${statName}"]`).forEach(el => {
+          el.style.display = show ? '' : 'none';
+        });
+
+        // Multi-player summary
+        document.querySelectorAll(`#multiPlayerSummary [data-stat="${statName}"]`).forEach(el => {
+          el.style.display = show ? '' : 'none';
+        });
+      });
+    }
+
+    Object.keys(statToggleMap).forEach(checkboxId => {
+      document.getElementById(checkboxId).addEventListener('change', applyStatToggles);
+    });
+
+    // URL params
+    function updateUrlParams() {
+      const params = new URLSearchParams();
+
+      if (selectedPlayers.length > 0) {
+        params.set('players', selectedPlayers.map(p => p.id).join(','));
+      }
+      if (filterName.value) params.set('name', filterName.value);
+      if (filterGameMode.value !== 'all') params.set('mode', filterGameMode.value);
+      if (filterDateFrom.value) params.set('from', filterDateFrom.value);
+      if (filterDateTo.value) params.set('to', filterDateTo.value);
+      if (filterGamesMin.value) params.set('gamesMin', filterGamesMin.value);
+      if (filterGamesMax.value) params.set('gamesMax', filterGamesMax.value);
+      if (filterWinRateMin.value) params.set('wrMin', filterWinRateMin.value);
+      if (filterWinRateMax.value) params.set('wrMax', filterWinRateMax.value);
+      if (filterTopX.value) params.set('top', filterTopX.value);
+      if (filterUnplayed.checked) params.set('unplayed', '1');
+      if (sortBy.value !== 'games-desc') params.set('sort', sortBy.value);
+
+      const newUrl = params.toString() ? `?${params.toString()}` : window.location.pathname;
+      window.history.replaceState({}, '', newUrl);
+    }
+
+    function loadFromUrlParams() {
+      const params = new URLSearchParams(window.location.search);
+
+      // Load players
+      const playerIds = (params.get('players') || '').split(',').filter(v => v);
+      playerIds.forEach(id => {
+        const name = knownPlayers[id] || `Player ${id}`;
+        selectedPlayers.push({ id, name, matches: null });
+      });
+
+      if (selectedPlayers.length > 0) {
+        renderSelectedPlayers();
+      }
+
+      // Load filters
+      if (params.get('name')) filterName.value = params.get('name');
+      if (params.get('mode')) filterGameMode.value = params.get('mode');
+      if (params.get('from')) filterDateFrom.value = params.get('from');
+      if (params.get('to')) filterDateTo.value = params.get('to');
+      if (params.get('gamesMin')) filterGamesMin.value = params.get('gamesMin');
+      if (params.get('gamesMax')) filterGamesMax.value = params.get('gamesMax');
+      if (params.get('wrMin')) filterWinRateMin.value = params.get('wrMin');
+      if (params.get('wrMax')) filterWinRateMax.value = params.get('wrMax');
+      if (params.get('top')) filterTopX.value = params.get('top');
+      if (params.get('unplayed') === '1') filterUnplayed.checked = true;
+      if (params.get('sort')) sortBy.value = params.get('sort');
+
+      // Load data if players specified
+      if (selectedPlayers.length > 0) {
+        loadAllPlayersData();
+      }
+    }
+
+    // Initialize
+    loadHeroes().then(() => {
+      loadFromUrlParams();
+    });
   </script>
 </body>
 </html>
